@@ -22,7 +22,7 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
 
 2. You need to get the library dependencies for all the projects and create IntelliJ IDEA project and module configuration files. In the root directory of this project (the same directory as this README file), at the command line enter:
 
-	sbt gen-idea
+	    sbt gen-idea
 
 	This should begin the download of a whole bunch of jar files. This will 
 	take awhile. The last steps in the process will involve creating the .iml files.
@@ -33,7 +33,7 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
 
 5. To run the Selenium tests using Cucumber, right-click on HelloWorld.feature in selenium-tests/src/test/resources/features and run it. To make it work, you will need to change the Program Arguments setting in the Run Configuration to add:
 
-	--glue code.test.cucumber
+	    --glue code.test.cucumber
 
 
 ### Reference
