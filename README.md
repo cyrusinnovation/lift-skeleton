@@ -9,8 +9,7 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
 ### What you need:
 
 1. IntelliJ IDEA with the Scala, sbt, and Cucumber-Java plugins.
-2. An installation of Scala with the scala command on your PATH.
-3. This git repository.
+2. This git repository.
 
 ### How-to:
 
