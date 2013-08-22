@@ -26,11 +26,13 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
 	This should begin the download of a whole bunch of jar files. This will 
 	take awhile. The last steps in the process will involve creating the .iml files.
 
-3. You should now be able to open the root directory of this project as a project in IDEA. To run the web application, run the RunWebApp class in lift-webapp/src/test/scala -- you will need to change the Working Directory setting in the Run Configuration to the lift-webapp directory (it defaults to the project root). You should see a page at http://localhost:8080/index .
+3. You should now be able to open the root directory of this project as a project in IDEA. 
 
-4. To run the Selenium tests using ScalaTest, run the HelloWorldIntegrationTests class in selenium-tests/src/test/scala/code/test/selenium . The test uses the HtmlUnit driver, so you will not see a browser window pop up.
+4. To run the web application, run the RunWebApp class in lift-webapp/src/test/scala -- you will need to change the Working Directory setting in the Run Configuration to the lift-webapp directory (it defaults to the project root). You should see a page at http://localhost:8080/index .
 
-5. To run the Selenium tests using Cucumber, right-click on HelloWorld.feature in selenium-tests/src/test/resources/features and run it. To make it work, you will need to change the Program Arguments setting in the Run Configuration to add:
+5. To run the Selenium tests using ScalaTest, run the HelloWorldIntegrationTests class in selenium-tests/src/test/scala/code/test/selenium . The test uses the HtmlUnit driver, so you will not see a browser window pop up.
+
+6. To run the Selenium tests using Cucumber, right-click on HelloWorld.feature in selenium-tests/src/test/resources/features and run it. To make it work, you will need to change the Program Arguments setting in the Run Configuration to add:
 
 	    --glue code.test.cucumber
 
