@@ -10,6 +10,7 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
 
 1. IntelliJ IDEA with the Scala, sbt, and Cucumber-Java plugins.
 2. This git repository.
+3. (Optional) Version 0.12.4 of sbt (http://www.scala-sbt.org/) installed somewhere IntelliJ IDEA can see it.
 
 ### How-to:
 
@@ -18,6 +19,18 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
 	The following shell script will run sbt on Unix-y systems:
 
 		java -Xmx513M -XX:MaxPermSize=256M -jar [PATH_TO_SBT_JAR_DIR]/sbt-launch.jar "$@"
+
+	At the time this is being written, the jar file that ships with the sbt
+	plugin for IDEA was built with Scala 2.9; if you reference this jar, you
+	will get a warning during the next step to the effect that "Binary version
+	(2.9.2) for dependency org.scala-lang#scala-library;2.9.2... differs
+	from Scala binary version in project (2.10)."
+
+	To avoid this warning and make everything use Scala 2.10 consistently,
+	install version 0.12.4 of sbt and point the shell script at its
+	sbt-launch.jar instead. You may also want to change the configuration of
+	the IDEA sbt plugin to use that jar as well; this setting may be found
+	in the IDEA preferences under Project Settings > SBT.
 
 2. You need to get the library dependencies for all the projects and create IntelliJ IDEA project and module configuration files. In the root directory of this project (the same directory as this README file), at the command line enter:
 
