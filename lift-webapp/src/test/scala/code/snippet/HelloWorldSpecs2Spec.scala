@@ -11,18 +11,7 @@ import org.specs2.mutable.Specification
 import org.specs2.specification.AroundExample
 import org.specs2.execute.AsResult
 
-/*
-// For moving to ScalaTest later
-
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.scalatest.FlatSpec
-
-@RunWith(classOf[JUnitRunner])
-class HelloWorldTests extends FlatSpec {
-*/
-
-object HelloWorldTestSpecs extends Specification with AroundExample{
+class HelloWorldSpecs2Spec extends Specification with AroundExample{
   val session = new LiftSession("", randomString(20), Empty)
   val stableTime = now
 
@@ -30,10 +19,10 @@ object HelloWorldTestSpecs extends Specification with AroundExample{
    * For additional ways of writing tests,
    * please see http://www.assembla.com/spaces/liftweb/wiki/Mocking_HTTP_Requests
    */
-  def around[T : AsResult](body: =>T) = {
+  def around[T : AsResult](f: =>T) = {
     S.initIfUninitted(session) {
       DependencyFactory.time.doWith(stableTime) {
-        AsResult( body)  // execute t inside a http session
+        AsResult(f)  // execute t inside a http session
       }
     }
   }
@@ -49,5 +38,4 @@ object HelloWorldTestSpecs extends Specification with AroundExample{
       str must startWith("<span>Welcome to")
     }
   }
-
 }
