@@ -11,7 +11,7 @@ import org.specs2.mutable.Specification
 import org.specs2.specification.AroundExample
 import org.specs2.execute.AsResult
 
-class HelloWorldSpecs2Spec extends Specification with AroundExample{
+class HelloWorldSpec extends Specification with AroundExample{
   val session = new LiftSession("", randomString(20), Empty)
   val stableTime = now
 
