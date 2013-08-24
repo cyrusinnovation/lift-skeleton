@@ -16,7 +16,7 @@ class HelloWorldScalaTest extends FlatSpec with MustMatchers {
 
   override def withFixture(test: NoArgTest) {
     S.initIfUninitted(session) {
-      DependencyFactory.time.doWith(stableTime) {
+      DependencyFactory.Time.doWith(stableTime) {
         super.withFixture(test) // execute t inside a http session
       }
     }

@@ -16,3 +16,5 @@ libraryDependencies ++= {
         "org.seleniumhq.selenium"   % "selenium-server" % "2.35.0"
     )
 }
+
+org.scalastyle.sbt.ScalastylePlugin.Settings

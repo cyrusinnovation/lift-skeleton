@@ -1,6 +1,6 @@
 # Lift Skeleton
 
-This is a skeleton for developing Lift applications as multi-module sbt projects. The skeleton also includes a module for running Selenium tests driven by Cucumber for Scala and ScalaTest.
+This is a skeleton for developing Lift applications as multi-module sbt projects. The skeleton also includes a module for running Selenium tests driven by Cucumber for Scala and ScalaTest. Scalastyle and its associated sbt plugin are also included.
 
 ## Importing into IntelliJ IDEA
 
@@ -49,6 +49,13 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
 
 	    --glue code.test.cucumber
 
+7. To run Scalastyle from sbt, use the command:
+
+        sbt scalastyle
+
+    A basic Scalastyle configuration has already been generated and is in scalastyle-config.xml. You can regenerate this file by entering the command:
+
+        sbt scalastyle-generate-config
 
 ### Reference
 

@@ -21,7 +21,7 @@ class HelloWorldSpec extends Specification with AroundExample{
    */
   def around[T : AsResult](f: =>T) = {
     S.initIfUninitted(session) {
-      DependencyFactory.time.doWith(stableTime) {
+      DependencyFactory.Time.doWith(stableTime) {
         AsResult(f)  // execute t inside a http session
       }
     }

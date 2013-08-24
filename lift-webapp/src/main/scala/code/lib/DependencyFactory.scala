@@ -15,7 +15,7 @@ import java.util.Date
  * stack basis.
  */
 object DependencyFactory extends Factory {
-  implicit object time extends FactoryMaker(Helpers.now _)
+  implicit object Time extends FactoryMaker(Helpers.now _)
 
   /**
    * objects in Scala are lazily created.  The init()
@@ -24,7 +24,7 @@ object DependencyFactory extends Factory {
    * registering their types with the dependency injector
    */
   private def init() {
-    List(time)
+    List(Time)
   }
   init()
 }
@@ -35,19 +35,19 @@ object DependencyFactory extends Factory {
  */
 sealed abstract class Changer {
   def changeDefaultImplementation() {
-    DependencyFactory.time.default.set(() => new Date())
+    DependencyFactory.Time.default.set(() => new Date())
   }
 
   def changeSessionImplementation() {
-    DependencyFactory.time.session.set(() => new Date())
+    DependencyFactory.Time.session.set(() => new Date())
   }
 
   def changeRequestImplementation() {
-    DependencyFactory.time.request.set(() => new Date())
+    DependencyFactory.Time.request.set(() => new Date())
   }
 
   def changeJustForCall(d: Date) {
-    DependencyFactory.time.doWith(d) {
+    DependencyFactory.Time.doWith(d) {
       // perform some calculations here
     }
   }
