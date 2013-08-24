@@ -7,7 +7,6 @@ scalaVersion := "2.10.0"
 resolvers ++= Seq("maven-central-repo" at "http://repo1.maven.org/maven2",
                   "snapshots"          at "http://oss.sonatype.org/content/repositories/snapshots")
 
-seq(webSettings :_*)
 
 unmanagedResourceDirectories in Test <+= (baseDirectory) { _ / "src/main/webapp" }
 
@@ -27,4 +26,8 @@ libraryDependencies ++= {
   )
 }
 
+webSettings
+
 org.scalastyle.sbt.ScalastylePlugin.Settings
+
+ScctPlugin.instrumentSettings

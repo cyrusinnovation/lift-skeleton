@@ -1,6 +1,6 @@
 # Lift Skeleton
 
-This is a skeleton for developing Lift applications as multi-module sbt projects. The skeleton also includes a module for running Selenium tests driven by Cucumber for Scala and ScalaTest. Scalastyle and its associated sbt plugin are also included.
+This is a skeleton for developing Lift applications as multi-module sbt projects. The skeleton also includes a module for running Selenium tests driven by Cucumber for Scala and ScalaTest. The Scalastyle style checker and the scct code coverage tool, along with their associated sbt plugins, are also included.
 
 ## Importing into IntelliJ IDEA
 
@@ -56,6 +56,17 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
     A basic Scalastyle configuration has already been generated and is in scalastyle-config.xml. You can regenerate this file by entering the command:
 
         sbt scalastyle-generate-config
+
+8. To run scct from sbt, clean first, then use the scct:test command:
+
+        sbt clean scct:test
+
+    This will generate coverage reports in each module's target/scala_<ver>/coverage-report/ directory. To merge all the child reports into one, use the command:
+
+        sbt scct-merge-report
+
+    The merged report will be created under the top-level target/scala_<ver>/coverage-report/ directory.
+
 
 ### Reference
 

@@ -18,3 +18,5 @@ libraryDependencies ++= {
 }
 
 org.scalastyle.sbt.ScalastylePlugin.Settings
+
+ScctPlugin.instrumentSettings
