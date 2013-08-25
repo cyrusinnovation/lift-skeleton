@@ -1,34 +1,48 @@
 # Lift Skeleton
 
-This is a skeleton for developing Lift applications as multi-module sbt projects; unit tests using ScalaTest and specs2 are demonstrated. The skeleton also includes a module for running Selenium tests driven by Cucumber for Scala and ScalaTest. The Scalastyle style checker and the scct code coverage tool, along with their associated sbt plugins, are also included.
+This is a skeleton for developing Lift applications as multi-module Gradle or sbt projects; unit
+tests using ScalaTest and specs2 are demonstrated. The skeleton also includes a module for running
+Selenium tests driven by Cucumber for Scala and ScalaTest. For sbt, the Scalastyle style checker
+and the scct code coverage tool, along with their associated plugins, are also included.
 
 The Lift project is based on the lift_blank template project included in the Lift distribution.
 
-## Configuring IntelliJ IDEA using Gradle
+## Table of Contents
+* [Configuring IntelliJ IDEA using Gradle](#gradleconfig)
+* [Configuring IntelliJ IDEA using sbt](#sbtconfig)
+* [Running the server and the tests in IDEA](#usingidea)
+* [Working with Gradle](#usinggradle)
+* [Working with sbt](#usingsbt)
+* [Reference](#reference)
 
-If you prefer to use sbt, see below. The Gradle IDEA plugin generates file-based IDEA project
+## Configuring IntelliJ IDEA using Gradle<a name="gradleconfig"/>
+
+If you prefer to use sbt, see below. The Gradle IDEA plugin generates file-based project
 information; i.e., .ipr, .iml, and .iws files.
 
 ### What you need:
 
-1. IntelliJ IDEA with the Scala, sbt, and Cucumber-Java plugins.
+1. IntelliJ IDEA with the Scala, Gradle, and Cucumber-Java plugins.
 2. An installation of Gradle you can run from the command line (ideally 1.7 or later)
 3. This git repository.
 
 ### How-to:
 
-1. We are going to use Gradle to bootstrap this process. The following steps will use the gradle command that comes with the installation, in this project's root directory (the same directory as this README file). 
+1. We are going to use Gradle to bootstrap this process. The following steps will make use of the `gradle`
+command that comes with the installation, in this project's root directory (the same directory as this README file).
 2. Retrieve all the library dependencies needed for the projects by entering the command
 
 		gradle build
+
+    This will take awhile to download all the jar files it needs.
 3. Now generate the IDEA configurations using the command
 
 		gradle idea
 
-	This will download a lot of source jar files.
+	This will download a lot of source jar files before creating the configurations.
 4. You should now be able to use IDEA to open the lift-skeleton.ipr file in the root directory of this project.
 	
-## Configuring IntelliJ IDEA using sbt
+## Configuring IntelliJ IDEA using sbt<a name="sbtconfig"/>
 
 This is an alternative to using Gradle to configure IDEA. It generates directory-based IDEA project information.
 
@@ -72,7 +86,7 @@ at the command line enter:
 3. You should now be able to open the root directory of this project as a project in IDEA.
 
 	
-## Running the server and the tests in IDEA
+## Running the server and the tests in IDEA<a name="usingidea"/>
 
 1. To run the web application in IDEA, run the RunWebApp class in lift-webapp/src/test/scala -- you will
 need to change the Working Directory setting in the Run Configuration to the lift-webapp directory
@@ -88,7 +102,7 @@ to change the Program Arguments setting in the Run Configuration to add:
 
 	    --glue code.test.cucumber
 
-### Working with Gradle
+## Working with Gradle<a name="usinggradle"/>
 
 The `gradle test` target does not run Cucumber tests. It will, however, run the ScalaTest and specs2 unit tests and the ScalaTest integration tests.
 
@@ -96,7 +110,9 @@ The `gradle test` target also does not currently run the web server before the t
 
 The `gradle cucumber` target runs the Cucumber tests, again without running the web server.
 
-### Working with sbt
+To add more modules to the project, add their names to the `include` directive in settings.gradle.
+
+## Working with sbt<a name="usingsbt"/>
 
 The `sbt test` target is configured to run the ScalaTest and specs2 unit tests, the ScalaTest integration tests and the Cucumber tests; however, the configuration isn't 
 currently working for the Cucumber tests for some reason I have been unable to identify.
@@ -135,7 +151,7 @@ The `sbt test` target also does not currently run the web server before the test
 will need to add not only a new val specifying the module as a Project, but also to use that val in the call to the
 aggregate method for the root project.
 
-### Reference
+## Reference<a name="reference"/>
 
 For more information on the how and why of this git repository, see:
 
