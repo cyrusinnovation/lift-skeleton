@@ -14,7 +14,9 @@ The Lift project is based on the lift_blank template project included in the Lif
 
 ### How-to:
 
-1. We are going to use sbt to bootstrap this process. You can either install your own sbt or use the jar that comes with the sbt plugin for IDEA. (It will be wherever IDEA keeps its cache--e.g., on OS X, the jar is located at: /Users/[USER]/Library/Caches/IntelliJIdea12/sbt/sbt-launch.jar .)
+1. We are going to use sbt to bootstrap this process. You can either install your own sbt or use the jar that
+comes with the sbt plugin for IDEA. (It will be wherever IDEA keeps its cache--e.g., on OS X, the jar is
+located at: /Users/[USER]/Library/Caches/IntelliJIdea12/sbt/sbt-launch.jar)
 
 	The following shell script will run sbt on Unix-y systems:
 
@@ -32,7 +34,9 @@ The Lift project is based on the lift_blank template project included in the Lif
 	the IDEA sbt plugin to use that jar as well; this setting may be found
 	in the IDEA preferences under Project Settings > SBT.
 
-2. You need to get the library dependencies for all the projects and create IntelliJ IDEA project and module configuration files. In the root directory of this project (the same directory as this README file), at the command line enter:
+2. You need to get the library dependencies for all the projects and create IntelliJ IDEA project and module
+configuration files. In the root directory of this project (the same directory as this README file),
+at the command line enter:
 
 	    sbt gen-idea
 
@@ -41,11 +45,17 @@ The Lift project is based on the lift_blank template project included in the Lif
 
 3. You should now be able to open the root directory of this project as a project in IDEA.
 
-4. To run the web application in IDEA, run the RunWebApp class in lift-webapp/src/test/scala -- you will need to change the Working Directory setting in the Run Configuration to the lift-webapp directory (it defaults to the project root). You should see a page at http://localhost:8080/index .
+4. To run the web application in IDEA, run the RunWebApp class in lift-webapp/src/test/scala -- you will
+need to change the Working Directory setting in the Run Configuration to the lift-webapp directory
+(it defaults to the project root). You should see a page at http://localhost:8080/index .
 
-5. To run the ScalaTest Selenium tests in IDEA, run the HelloWorldIntegrationTests class in selenium-tests/src/test/scala/code/test/selenium . The test uses the HtmlUnit driver, so you will not see a browser window pop up.
+5. To run the ScalaTest Selenium tests in IDEA, run the HelloWorldIntegrationTests class in
+selenium-tests/src/test/scala/code/test/selenium . The test uses the HtmlUnit driver, so you
+will not see a browser window pop up.
 
-6. To run the Cucumber Selenium tests in IDEA, right-click on HelloWorld.feature in selenium-tests/src/test/resources/features and run it. To make it work, you will need to change the Program Arguments setting in the Run Configuration to add:
+6. To run the Cucumber Selenium tests in IDEA, right-click on HelloWorld.feature in
+selenium-tests/src/test/resources/features and run it. To make it work, you will need
+to change the Program Arguments setting in the Run Configuration to add:
 
 	    --glue code.test.cucumber
 
@@ -70,7 +80,8 @@ manually or implement the cucumberBefore and cucumberAfter settings in selenium-
 
         sbt scalastyle
 
-    A basic Scalastyle configuration has already been generated and is in scalastyle-config.xml. You can regenerate this file by entering the command:
+    A basic Scalastyle configuration has already been generated and is in scalastyle-config.xml. You can regenerate this
+    file by entering the command:
 
         sbt scalastyle-generate-config
 
@@ -78,12 +89,16 @@ manually or implement the cucumberBefore and cucumberAfter settings in selenium-
 
         sbt clean scct:test
 
-    This will generate coverage reports in each module's target/scala_<ver>/coverage-report/ directory. To merge all the child reports into one, use the command:
+    This will generate coverage reports in each module's target/scala_<ver>/coverage-report/ directory. To merge all
+    the child reports into one, use the command:
 
         sbt scct-merge-report
 
     The merged report will be created under the top-level target/scala_<ver>/coverage-report/ directory.
 
+5. To add more modules to the project, edit the Build.scala file under the top-level project/ directory. Note that you
+will need to add not only a new val specifying the module as a Project, but also to use that val in the call to the
+aggregate method for the root project.
 
 ### Reference
 
