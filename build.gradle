@@ -1,26 +1,59 @@
 apply plugin: 'scala'
 
-allprojects {				// Needed to handle multi-module IDEA projects
-    apply plugin: 'idea'		
-}
-
-version = '1.0'
-
-repositories {
-    mavenCentral()
-    maven {
-        url "http://mirrors.ibiblio.org/pub/mirrors/maven2"
-    }
-}
+version = projectVersion       // See gradle.properties
 
 compileScala {
     scalaCompileOptions.fork = true
     scalaCompileOptions.useAnt = false
     scalaCompileOptions.deprecation = true
     scalaCompileOptions.unchecked = true
-
 }
 
 dependencies {
-    compile "org.scala-lang:scala-library:2.10.0"
+    compile "org.scala-lang:scala-library:$scalaVersion"
+}
+
+buildscript {               // For Scalastyle plugin
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.github.mansur.scalastyle:gradle-scalastyle-plugin_2.10:0.2"
+        classpath "org.scalastyle:scalastyle_2.10:0.3.2"
+        classpath "commons-lang:commons-lang:2.6"
+    }
+}
+
+allprojects {
+    apply plugin: 'idea'    // Needed in here to handle multi-module IDEA projects
+    apply plugin: 'scala'
+    apply plugin: 'scalaStyle'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "http://mirrors.ibiblio.org/pub/mirrors/maven2"
+        }
+    }
+
+    scalaStyle {
+        configLocation = "scalastyle-config.xml"
+        includeTestSourceDirectory = true
+    }
+}
+
+subprojects {
+    scalaStyle {
+      source = "src/main/scala"
+      testSource = "src/test/scala"
+      outputFile  = "$buildDir/scala_style_result.xml"
+    }
+}
+
+project(':selenium-tests') {
+    dependencies {
+        compile project(':lift-webapp')
+    }
 }

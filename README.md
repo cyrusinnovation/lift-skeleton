@@ -104,24 +104,53 @@ to change the Program Arguments setting in the Run Configuration to add:
 
 ## Working with Gradle<a name="usinggradle"/>
 
-The `gradle test` target does not run Cucumber tests. It will, however, run the ScalaTest and specs2 unit tests and the ScalaTest integration tests.
+1. To build and run the tests, use:
 
-The `gradle test` target also does not currently run the web server before the tests. You can run it from gradle by calling the `gradle jettyRun` target.
+        gradle test
 
-The `gradle cucumber` target runs the Cucumber tests, again without running the web server.
+    or
+        gradle build
 
-To add more modules to the project, add their names to the `include` directive in settings.gradle.
+    These targets do not run Cucumber tests. They will, however, run the ScalaTest and specs2 unit tests and
+    the ScalaTest integration tests.
+
+    These targets also do not currently run the web server before the tests.
+
+    Note that gradle builds artifacts to build/ subdirectories of the main project and of each module and not
+    to target/ directories in the manner of Maven and sbt.
+
+2. To run the web server from gradle, use:
+
+        gradle jettyRun
+
+3. To run just the Cucumber tests, again without running the web server, use:
+
+        gradle cucumber
+
+4. To run Scalastyle, use:
+
+        gradle scalaStyle
+
+    Currently Scalastyle fails the build on errors but not on warnings. Output is sent to a file named scala_style_result.xml in
+    the build/ subdirectory of each module.
+
+5. To add more modules to the project, add their names to the `include` directive in settings.gradle.
 
 ## Working with sbt<a name="usingsbt"/>
 
-The `sbt test` target is configured to run the ScalaTest and specs2 unit tests, the ScalaTest integration tests and the Cucumber tests; however, the configuration isn't 
-currently working for the Cucumber tests for some reason I have been unable to identify.
-
-The `sbt test` target also does not currently run the web server before the tests, so you will need either to do that manually or implement the cucumberBefore and cucumberAfter settings in selenium-tests/build.sbt.
-
-1. To build and run the tests, use the command:
+1. To build and run the tests, use:
 
         sbt test
+
+    The `sbt test` target is configured to run the ScalaTest and specs2 unit tests, the ScalaTest integration
+    tests and the Cucumber tests; however, the configuration isn't currently working for the Cucumber tests
+    for some reason I have been unable to identify.
+
+    The `sbt test` target also does not currently run the web server before the tests, so you will need either
+    to do that manually or implement the cucumberBefore and cucumberAfter settings in selenium-tests/build.sbt.
+
+    Like Maven and unlike Gradle, sbt builds artifacts to target/ subdirectories of the main project
+    and of each module.
 
 2. To run just the Cucumber tests (this works), use the command:
 
