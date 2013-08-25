@@ -1,0 +1,24 @@
+apply plugin: 'scala'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.scalatest:scalatest_2.10:2.0.M5b'
+    testCompile 'info.cukes:cucumber-scala_2.10:1.1.4'
+    testCompile "org.seleniumhq.selenium:selenium-server:2.35.0"
+}
+
+task cucumber() {
+    dependsOn assemble
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = sourceSets.test.runtimeClasspath
+            args = ['-f', 'pretty', '--glue', 'code.test.cucumber', 'src/test/resources']
+
+        }
+    }
+}

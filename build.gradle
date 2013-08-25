@@ -1,0 +1,26 @@
+apply plugin: 'scala'
+
+allprojects {				// Needed to handle multi-module IDEA projects
+    apply plugin: 'idea'		
+}
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://mirrors.ibiblio.org/pub/mirrors/maven2"
+    }
+}
+
+compileScala {
+    scalaCompileOptions.fork = true
+    scalaCompileOptions.useAnt = false
+    scalaCompileOptions.deprecation = true
+    scalaCompileOptions.unchecked = true
+
+}
+
+dependencies {
+    compile "org.scala-lang:scala-library:2.10.0"
+}

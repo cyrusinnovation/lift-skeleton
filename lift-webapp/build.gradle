@@ -1,0 +1,31 @@
+apply plugin: 'scala'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'net.liftweb:lift-webkit_2.10:2.5.1'
+    compile 'net.liftmodules:lift-jquery-module_2.5_2.10:2.4'
+    compile 'ch.qos.logback:logback-classic:1.0.13'
+
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.scalatest:scalatest_2.10:2.0.M5b'
+    testCompile 'org.specs2:specs2_2.10:2.1.1'
+
+    // Only need these for compiling RunWebApp - but may be better just to run it from Gradle
+    testCompile 'org.eclipse.jetty:jetty-webapp:8.1.7.v20120910'
+    testCompile 'org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016'
+}
+
+jettyRun.contextPath = ''
+
+// Do we need this for anything?
+// unmanagedResourceDirectories in Test <+= (baseDirectory) { _ / "src/main/webapp" }
+
+
+// TODO
+// org.scalastyle.sbt.ScalastylePlugin.Settings
+// ScctPlugin.instrumentSettings

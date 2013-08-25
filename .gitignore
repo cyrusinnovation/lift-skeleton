@@ -1,5 +1,11 @@
-target
-.DS_Store
+target/
+build/
+out/
 console.devmode.log
+.DS_Store
+.gradle
 .idea
 .idea_modules
+*.ipr
+*.iml
+*.iws

@@ -4,7 +4,33 @@ This is a skeleton for developing Lift applications as multi-module sbt projects
 
 The Lift project is based on the lift_blank template project included in the Lift distribution.
 
+## Configuring IntelliJ IDEA using Gradle
+
+If you prefer to use sbt, see below. The Gradle IDEA plugin generates file-based IDEA project
+information; i.e., .ipr, .iml, and .iws files.
+
+### What you need:
+
+1. IntelliJ IDEA with the Scala, sbt, and Cucumber-Java plugins.
+2. An installation of Gradle you can run from the command line (ideally 1.7 or later)
+3. This git repository.
+
+### How-to:
+
+1. We are going to use Gradle to bootstrap this process. The following steps will use the gradle command that comes with the installation, in this project's root directory (the same directory as this README file). 
+2. Retrieve all the library dependencies needed for the projects by entering the command
+
+		gradle build
+3. Now generate the IDEA configurations using the command
+
+		gradle idea
+
+	This will download a lot of source jar files.
+4. You should now be able to use IDEA to open the lift-skeleton.ipr file in the root directory of this project.
+	
 ## Configuring IntelliJ IDEA using sbt
+
+This is an alternative to using Gradle to configure IDEA. It generates directory-based IDEA project information.
 
 ### What you need:
 
@@ -45,28 +71,37 @@ at the command line enter:
 
 3. You should now be able to open the root directory of this project as a project in IDEA.
 
-4. To run the web application in IDEA, run the RunWebApp class in lift-webapp/src/test/scala -- you will
+	
+## Running the server and the tests in IDEA
+
+1. To run the web application in IDEA, run the RunWebApp class in lift-webapp/src/test/scala -- you will
 need to change the Working Directory setting in the Run Configuration to the lift-webapp directory
 (it defaults to the project root). You should see a page at http://localhost:8080/index .
 
-5. To run the ScalaTest Selenium tests in IDEA, run the HelloWorldIntegrationTests class in
+2. To run the ScalaTest Selenium tests in IDEA, run the HelloWorldIntegrationTests class in
 selenium-tests/src/test/scala/code/test/selenium . The test uses the HtmlUnit driver, so you
 will not see a browser window pop up.
 
-6. To run the Cucumber Selenium tests in IDEA, right-click on HelloWorld.feature in
+3. To run the Cucumber Selenium tests in IDEA, right-click on HelloWorld.feature in
 selenium-tests/src/test/resources/features and run it. To make it work, you will need
 to change the Program Arguments setting in the Run Configuration to add:
 
 	    --glue code.test.cucumber
 
+### Working with Gradle
+
+The `gradle test` target does not run Cucumber tests. It will, however, run the ScalaTest and specs2 unit tests and the ScalaTest integration tests.
+
+The `gradle test` target also does not currently run the web server before the tests. You can run it from gradle by calling the `gradle jettyRun` target.
+
+The `gradle cucumber` target runs the Cucumber tests, again without running the web server.
+
 ### Working with sbt
 
-The sbt test target is configured to run the ScalaTest and specs2 unit tests, the ScalaTest integration tests
-and the Cucumber tests; however, the configuration isn't currently working for the Cucumber tests for some
-reason I have been unable to identify.
+The `sbt test` target is configured to run the ScalaTest and specs2 unit tests, the ScalaTest integration tests and the Cucumber tests; however, the configuration isn't 
+currently working for the Cucumber tests for some reason I have been unable to identify.
 
-The test target also does not currently run the web server before the tests, so you will need either to do that
-manually or implement the cucumberBefore and cucumberAfter settings in selenium-tests/build.sbt.
+The `sbt test` target also does not currently run the web server before the tests, so you will need either to do that manually or implement the cucumberBefore and cucumberAfter settings in selenium-tests/build.sbt.
 
 1. To build and run the tests, use the command:
 
