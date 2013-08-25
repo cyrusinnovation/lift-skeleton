@@ -10,13 +10,19 @@ resolvers ++= Seq("maven-central-repo" at "http://repo1.maven.org/maven2",
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 libraryDependencies ++= {
-    Seq("junit"                     % "junit" % "4.11",
-        "org.scalatest"             % "scalatest_2.10"  % "2.0.M5b",
-        "info.cukes"                % "cucumber-scala"  % "1.1.3",
-        "org.seleniumhq.selenium"   % "selenium-server" % "2.35.0"
+    Seq("junit"                     % "junit"                   % "4.11",
+        "org.scalatest"             % "scalatest_2.10"          % "2.0.M5b",
+        "info.cukes"                % "cucumber-scala_2.10"     % "1.1.4",
+        "org.seleniumhq.selenium"   % "selenium-server"         % "2.35.0"
     )
 }
 
 org.scalastyle.sbt.ScalastylePlugin.Settings
 
 ScctPlugin.instrumentSettings
+
+cucumberSettingsWithTestPhaseIntegration
+
+// Eventually use this for starting and stopping the web server when running integration tests:
+// cucumberBefore - A function of type () => Unit that will be run BEFORE cucumber is executed.
+// cucumberAfter - A function of type () => Unit that will be run AFTER cucumber is executed.

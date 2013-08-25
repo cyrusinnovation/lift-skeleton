@@ -1,10 +1,10 @@
 # Lift Skeleton
 
-This is a skeleton for developing Lift applications as multi-module sbt projects. The skeleton also includes a module for running Selenium tests driven by Cucumber for Scala and ScalaTest. The Scalastyle style checker and the scct code coverage tool, along with their associated sbt plugins, are also included.
+This is a skeleton for developing Lift applications as multi-module sbt projects; unit tests using ScalaTest and specs2 are demonstrated. The skeleton also includes a module for running Selenium tests driven by Cucumber for Scala and ScalaTest. The Scalastyle style checker and the scct code coverage tool, along with their associated sbt plugins, are also included.
 
-## Importing into IntelliJ IDEA
+The Lift project is based on the lift_blank template project included in the Lift distribution.
 
-How to repeatably create a multi-module Scala project in IntelliJ IDEA:
+## Configuring IntelliJ IDEA using sbt
 
 ### What you need:
 
@@ -39,17 +39,34 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
 	This should begin the download of a whole bunch of jar files. This will 
 	take awhile. The last steps in the process will involve creating the .iml files.
 
-3. You should now be able to open the root directory of this project as a project in IDEA. 
+3. You should now be able to open the root directory of this project as a project in IDEA.
 
-4. To run the web application, run the RunWebApp class in lift-webapp/src/test/scala -- you will need to change the Working Directory setting in the Run Configuration to the lift-webapp directory (it defaults to the project root). You should see a page at http://localhost:8080/index .
+4. To run the web application in IDEA, run the RunWebApp class in lift-webapp/src/test/scala -- you will need to change the Working Directory setting in the Run Configuration to the lift-webapp directory (it defaults to the project root). You should see a page at http://localhost:8080/index .
 
-5. To run the Selenium tests using ScalaTest, run the HelloWorldIntegrationTests class in selenium-tests/src/test/scala/code/test/selenium . The test uses the HtmlUnit driver, so you will not see a browser window pop up.
+5. To run the ScalaTest Selenium tests in IDEA, run the HelloWorldIntegrationTests class in selenium-tests/src/test/scala/code/test/selenium . The test uses the HtmlUnit driver, so you will not see a browser window pop up.
 
-6. To run the Selenium tests using Cucumber, right-click on HelloWorld.feature in selenium-tests/src/test/resources/features and run it. To make it work, you will need to change the Program Arguments setting in the Run Configuration to add:
+6. To run the Cucumber Selenium tests in IDEA, right-click on HelloWorld.feature in selenium-tests/src/test/resources/features and run it. To make it work, you will need to change the Program Arguments setting in the Run Configuration to add:
 
 	    --glue code.test.cucumber
 
-7. To run Scalastyle from sbt, use the command:
+### Working with sbt
+
+The sbt test target is configured to run the ScalaTest and specs2 unit tests, the ScalaTest integration tests
+and the Cucumber tests; however, the configuration isn't currently working for the Cucumber tests for some
+reason I have been unable to identify.
+
+The test target also does not currently run the web server before the tests, so you will need either to do that
+manually or implement the cucumberBefore and cucumberAfter settings in selenium-tests/build.sbt.
+
+1. To build and run the tests, use the command:
+
+        sbt test
+
+2. To run just the Cucumber tests (this works), use the command:
+
+        sbt cucumber
+
+3. To run Scalastyle from sbt, use the command:
 
         sbt scalastyle
 
@@ -57,7 +74,7 @@ How to repeatably create a multi-module Scala project in IntelliJ IDEA:
 
         sbt scalastyle-generate-config
 
-8. To run scct from sbt, clean first, then use the scct:test command:
+4. To run scct from sbt, clean first, then use the scct:test command:
 
         sbt clean scct:test
 
