@@ -50,7 +50,10 @@ command that comes with the installation, in this project's root directory (the 
 
 	This will download a lot of source jar files before creating the configurations.
 4. You should now be able to use IDEA to open the lift-skeleton.ipr file in the root directory of this project.
-5. If you want to clean out the IDEA project and module files before starting over, use:
+5. The Gradle idea plugin makes the project's build output go to an `out/` subdirectory of the root project.
+If you want to use the same directory as is used by the command-line Gradle build, in the IDEA project
+settings, change that directory to `build/`.
+6. If you want to clean out the IDEA project and module files before starting over, use:
 
         gradle cleanIdea
 
