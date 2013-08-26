@@ -2,11 +2,16 @@ apply plugin: 'scala'
 
 version = projectVersion       // See gradle.properties
 
-compileScala {
+tasks.withType(ScalaCompile) {
     scalaCompileOptions.fork = true
     scalaCompileOptions.useAnt = false
     scalaCompileOptions.deprecation = true
     scalaCompileOptions.unchecked = true
+
+    configure(scalaCompileOptions.forkOptions) {
+      memoryMaximumSize = '1g'
+      jvmArgs = ['-XX:MaxPermSize=512m']
+    }
 }
 
 dependencies {
@@ -49,6 +54,10 @@ subprojects {
       source = "src/main/scala"
       testSource = "src/test/scala"
       outputFile  = "$buildDir/scala_style_result.xml"
+    }
+
+    test {
+      jvmArgs '-XX:MaxPermSize=256m'
     }
 }
 
