@@ -13,8 +13,6 @@ task cucumber() {
             classpath = sourceSets.test.runtimeClasspath
             args = ['-f', 'pretty', '--glue', 'code.test.cucumber', 'src/test/resources']
 
-            //TODO eliminate this
-            systemProperty 'webdriver.chrome.driver', '/Users/cyrusinnovation/bin/chromedriver'
         }
     }
 }

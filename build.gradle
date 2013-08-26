@@ -58,7 +58,6 @@ subprojects {
 
     test {
       jvmArgs '-XX:MaxPermSize=256m'
-      systemProperty 'webdriver.chrome.driver', '/Users/cyrusinnovation/bin/chromedriver'
     }
 }
 

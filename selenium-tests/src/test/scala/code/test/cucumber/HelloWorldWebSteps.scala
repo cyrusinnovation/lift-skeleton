@@ -3,13 +3,13 @@ package code.test.cucumber
 import cucumber.api.scala.{ScalaDsl, EN}
 import org.scalatest.concurrent.Eventually._
 import org.scalatest.matchers.ShouldMatchers
-import org.scalatest.selenium.{Chrome, HtmlUnit}
+import org.scalatest.selenium.HtmlUnit
 import code.test.cucumber.pages.{StaticContentPage, Homepage}
 
 // TODO: Abstract out the HtmlUnit mixin so that different drivers may be used (for go, find, etc.)
 // TODO: Abstract out the host so that tests can be run in different environments
 // TODO: Probably need a better PageObject abstraction here
-class HelloWorldWebSteps extends ScalaDsl with EN with Chrome with ShouldMatchers {
+class HelloWorldWebSteps extends ScalaDsl with EN with HtmlUnit with ShouldMatchers {
   private val host = "http://localhost:8080"
   private val pagesByIdentifier = Map("home" -> Homepage,
                                       "Static Content" -> StaticContentPage)
