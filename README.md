@@ -1,9 +1,10 @@
 # Lift Skeleton
 
 This is a skeleton for developing Lift applications as multi-module Gradle or sbt projects; unit
-tests using ScalaTest and specs2 are demonstrated. The skeleton also includes a module for running
-Selenium tests driven by Cucumber for Scala and ScalaTest. For sbt, the Scalastyle style checker
-and the scct code coverage tool, along with their associated plugins, are also included.
+tests using ScalaTest and specs2 are demonstrated, as well as static code analysis using the 
+Scalastyle style checker. The skeleton also includes a module for running Selenium tests driven 
+by Cucumber for Scala and ScalaTest. For sbt, the scct code coverage tool, along with its 
+associated plugin, is also included.
 
 The Lift project is based on the lift_blank template project included in the Lift distribution.
 
