@@ -7,8 +7,10 @@ import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.selenium.WebBrowser
 import code.test.cucumber.pages.{StaticContentPage, Homepage}
 import org.scalatest.time.SpanSugar
-import org.openqa.selenium.WebDriver
+import org.openqa.selenium.{Platform, WebDriver}
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
+import code.test.selenium.WebDriverFactory
+import org.openqa.selenium.remote.{BrowserType, DesiredCapabilities}
 
 // TODO: Abstract out the HtmlUnit mixin so that different drivers may be used (for go, find, etc.)
 // TODO: Abstract out the host so that tests can be run in different environments
@@ -21,7 +23,8 @@ class HelloWorldWebSteps extends ScalaDsl with EN with WebBrowser with ShouldMat
                                 StaticContentPage.path -> StaticContentPage)
 
   implicit val patienceConfig = PatienceConfig(2 seconds, 250 millis)      // Timeout and poll interval for eventually
-  implicit val webDriver: WebDriver = new HtmlUnitDriver()
+  private val desiredCapabilities = new DesiredCapabilities() { setBrowserName(BrowserType.HTMLUNIT) }
+  implicit val webDriver: WebDriver = new WebDriverFactory().createDriver(desiredCapabilities)
 
   Given("^I have browsed to the (.*) page") {
     (pageIdentifier: String) => {
