@@ -3,7 +3,7 @@
 This is a skeleton for developing Lift applications as multi-module Gradle or sbt projects; unit
 tests using ScalaTest and specs2 are demonstrated, as well as static code analysis using the 
 Scalastyle style checker. The skeleton also includes a module for running Selenium tests driven 
-by Cucumber for Scala and ScalaTest. For sbt, the scct code coverage tool, along with its 
+by Cucumber for Scala or by ScalaTest. For sbt, the scct code coverage tool, along with its
 associated plugin, is also included.
 
 The Lift project is based on the lift_blank template project included in the Lift distribution.
@@ -31,6 +31,14 @@ information; i.e., .ipr, .iml, and .iws files.
 
 1. We are going to use Gradle to bootstrap this process. The following steps will make use of the `gradle`
 command that comes with the installation, in this project's root directory (the same directory as this README file).
+
+    NOTE: The Gradle build relies on the gradle-scalastyle-plugin for Scala 2.10, which is not yet
+    in a public Maven repository. To get the jar, you will need to git clone
+    [https://github.com/cyrusinnovation/gradle-scalastyle-plugin] and then run
+
+        gradle install
+
+    to install the jar file to your local Maven repository, from which the lift-skeleton build can pick it up.
 2. Retrieve all the library dependencies needed for the projects by entering the command
 
 		gradle build
@@ -42,7 +50,14 @@ command that comes with the installation, in this project's root directory (the 
 
 	This will download a lot of source jar files before creating the configurations.
 4. You should now be able to use IDEA to open the lift-skeleton.ipr file in the root directory of this project.
-	
+5. If you want to clean out the IDEA project and module files before starting over, use:
+
+        gradle cleanIdea
+
+    If you want to clean out the IDEA workspace file (the .iws file), use:
+
+        cleanIdeaWorkspace
+
 ## Configuring IntelliJ IDEA using sbt<a name="sbtconfig"/>
 
 This is an alternative to using Gradle to configure IDEA. It generates directory-based IDEA project information.
@@ -86,7 +101,6 @@ at the command line enter:
 
 3. You should now be able to open the root directory of this project as a project in IDEA.
 
-	
 ## Running the server and the tests in IDEA<a name="usingidea"/>
 
 1. To run the web application in IDEA, run the RunWebApp class in lift-webapp/src/test/scala -- you will
@@ -110,6 +124,7 @@ to change the Program Arguments setting in the Run Configuration to add:
         gradle test
 
     or
+
         gradle build
 
     These targets do not run Cucumber tests. They will, however, run the ScalaTest and specs2 unit tests and
