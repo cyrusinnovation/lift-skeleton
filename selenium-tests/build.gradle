@@ -12,7 +12,7 @@ task cucumber() {
             main = "cucumber.api.cli.Main"
             classpath = sourceSets.test.runtimeClasspath
             args = ['-f', 'pretty', '--glue', 'code.test.cucumber', 'src/test/resources']
-
+            systemProperties = System.getProperties()
         }
     }
 }

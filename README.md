@@ -110,6 +110,12 @@ at the command line enter:
 need to change the Working Directory setting in the Run Configuration to the lift-webapp directory
 (it defaults to the project root). You should see a page at http://localhost:8080/index .
 
+    You can specify the web browser for running the integration tests by adding system
+    properties to the "VM Options" in the Run configurations. For example, for Chrome,
+    you might add:
+
+     -Dweb.driver.type="chrome" -Dchrome.driver.path="/usr/bin/chromedriver" -Dwebdriver.chrome.bin="/usr/bin/chrome/"
+
 2. To run the ScalaTest Selenium tests in IDEA, run the HelloWorldIntegrationTests class in
 selenium-tests/src/test/scala/code/test/selenium . The test uses the HtmlUnit driver, so you
 will not see a browser window pop up.
@@ -130,13 +136,25 @@ to change the Program Arguments setting in the Run Configuration to add:
 
         gradle build
 
+    Note that gradle builds artifacts to build/ subdirectories of the main project and of each module and not
+    to target/ directories in the manner of Maven and sbt.
+
     These targets do not run Cucumber tests. They will, however, run the ScalaTest and specs2 unit tests and
     the ScalaTest integration tests.
 
     These targets also do not currently run the web server before the tests.
 
-    Note that gradle builds artifacts to build/ subdirectories of the main project and of each module and not
-    to target/ directories in the manner of Maven and sbt.
+    The browser to be used with the integration tests can be specified using system properties set on the
+    Gradle command line. For example:
+
+        gradle -Dweb.driver.type="firefox" test
+
+    Chrome requires more parameters:
+
+        gradle -Dweb.driver.type="chrome" -Dchrome.driver.path="/usr/bin/chromedriver" -Dwebdriver.chrome.bin="/usr/bin/chrome/" test
+
+    If no browser is specified, the HtmlUnit driver is used. For more details, see the comments at the top of
+    `WebDriverFactory.scala`.
 
 2. To run the web server from gradle, use:
 
@@ -145,6 +163,10 @@ to change the Program Arguments setting in the Run Configuration to add:
 3. To run just the Cucumber tests, again without running the web server, use:
 
         gradle cucumber
+
+    You can specify the web browser to use with cucumber too:
+
+        gradle -Dweb.driver.type="firefox" cucumber
 
 4. To run Scalastyle, use:
 

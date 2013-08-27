@@ -2,33 +2,15 @@ package code.test.selenium
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{Suite, BeforeAndAfterEach, FlatSpec}
+import org.scalatest.FlatSpec
 import org.scalatest.concurrent.Eventually._
 import org.scalatest.matchers.ShouldMatchers._
 import org.scalatest.selenium.WebBrowser
 import org.scalatest.time._
-import org.openqa.selenium.htmlunit.HtmlUnitDriver
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.remote.{BrowserType, DesiredCapabilities}
-
-trait DriverBuilder extends BeforeAndAfterEach { this: Suite =>
-
-  private val desiredCapabilities = new DesiredCapabilities() { setBrowserName(BrowserType.CHROME) }
-  implicit val webDriver: WebDriver = new WebDriverFactory().createDriver(desiredCapabilities)
-
-  override def beforeEach() {
-  }
-
-  override def afterEach() {
-    webDriver.quit()
-  }
-}
+import com.cyrusinnovation.selenium.DriverBuilder
 
 @RunWith(classOf[JUnitRunner])
 class HelloWorldIntegrationTests extends FlatSpec with WebBrowser with DriverBuilder with SpanSugar {
-
-  val applicationHomepage: String = "http://localhost:8080/"
-
 
   "The test framework" should "be able to access and query pages correctly" in {
     go to "http://www.google.com"
@@ -38,6 +20,11 @@ class HelloWorldIntegrationTests extends FlatSpec with WebBrowser with DriverBui
     // Google's search is rendered dynamically with JavaScript.
     eventually (timeout(2 seconds), interval(250 millis)) { pageTitle should be ("Cheese! - Google Search") }
   }
+}
+
+@RunWith(classOf[JUnitRunner])
+class WebApplicationIntegrationTests extends FlatSpec with WebBrowser with DriverBuilder with SpanSugar {
+  val applicationHomepage: String = "http://localhost:8080/"
 
   "The blank Lift application" should "be accessible" in {
     go to applicationHomepage

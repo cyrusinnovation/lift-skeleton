@@ -58,6 +58,7 @@ subprojects {
 
     test {
       jvmArgs '-XX:MaxPermSize=256m'
+      systemProperties = System.getProperties()
     }
 }
 
