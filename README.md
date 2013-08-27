@@ -156,6 +156,10 @@ to change the Program Arguments setting in the Run Configuration to add:
     If no browser is specified, the HtmlUnit driver is used. For more details, see the comments at the top of
     `WebDriverFactory.scala`.
 
+    Tests are by default run against http://localhost:8080/ -- if you need to change this in your tests, set the
+    value of the default.base.url system property. See the comments at the top of DefaultBaseURLProvider.scala for
+    details.
+
 2. To run the web server from gradle, use:
 
         gradle jettyRun

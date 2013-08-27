@@ -7,7 +7,7 @@ import org.scalatest.concurrent.Eventually._
 import org.scalatest.matchers.ShouldMatchers._
 import org.scalatest.selenium.WebBrowser
 import org.scalatest.time._
-import com.cyrusinnovation.selenium.DriverBuilder
+import com.cyrusinnovation.selenium.{DefaultBaseURLProvider, DriverBuilder}
 
 @RunWith(classOf[JUnitRunner])
 class HelloWorldIntegrationTests extends FlatSpec with WebBrowser with DriverBuilder with SpanSugar {
@@ -23,8 +23,8 @@ class HelloWorldIntegrationTests extends FlatSpec with WebBrowser with DriverBui
 }
 
 @RunWith(classOf[JUnitRunner])
-class WebApplicationIntegrationTests extends FlatSpec with WebBrowser with DriverBuilder with SpanSugar {
-  val applicationHomepage: String = "http://localhost:8080/"
+class WebApplicationIntegrationTests extends FlatSpec with WebBrowser with DriverBuilder with DefaultBaseURLProvider with SpanSugar {
+  val applicationHomepage: String = defaultBaseUrl
 
   "The blank Lift application" should "be accessible" in {
     go to applicationHomepage

@@ -10,18 +10,19 @@ import org.scalatest.time.SpanSugar
 import org.openqa.selenium.{Platform, WebDriver}
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import org.openqa.selenium.remote.{BrowserType, DesiredCapabilities}
-import com.cyrusinnovation.selenium.WebDriverFactory
+import com.cyrusinnovation.selenium.{DefaultBaseURLProvider, WebDriverFactory}
 
-// TODO: Abstract out the host so that tests can be run in different environments
-class HelloWorldWebSteps extends ScalaDsl with EN with WebBrowser with ShouldMatchers with SpanSugar {
-  private val host = "http://localhost:8080"
+class HelloWorldWebSteps extends ScalaDsl with EN with WebBrowser with DefaultBaseURLProvider with ShouldMatchers with SpanSugar {
+  private  val host = defaultBaseUrl
+  implicit val webDriver: WebDriver = new WebDriverFactory().driver()
+  implicit val patienceConfig = PatienceConfig(2 seconds, 250 millis)      // Timeout and poll interval for "eventually" method
+
+
   private val pagesByIdentifier = Map("home" -> Homepage,
                                       "Static Content" -> StaticContentPage)
   private val pagesByPath = Map(Homepage.path -> Homepage,
                                 StaticContentPage.path -> StaticContentPage)
 
-  implicit val patienceConfig = PatienceConfig(2 seconds, 250 millis)      // Timeout and poll interval for "eventually" method
-  implicit val webDriver: WebDriver = new WebDriverFactory().driver()
 
   Given("^I have browsed to the (.*) page") {
     (pageIdentifier: String) => {
