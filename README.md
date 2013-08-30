@@ -164,6 +164,9 @@ to change the Program Arguments setting in the Run Configuration to add:
 
         gradle jettyRun
 
+    Note that running the web server from Gradle can lock Gradle cache files and interfere with running other
+    Gradle processes.
+
 3. To run just the Cucumber tests, again without running the web server, use:
 
         gradle cucumber
