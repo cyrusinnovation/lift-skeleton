@@ -7,14 +7,13 @@ import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.selenium.WebBrowser
 import code.test.cucumber.pages.{StaticContentPage, Homepage}
 import org.scalatest.time.SpanSugar
-import org.openqa.selenium.{Platform, WebDriver}
-import org.openqa.selenium.htmlunit.HtmlUnitDriver
-import org.openqa.selenium.remote.{BrowserType, DesiredCapabilities}
+import org.openqa.selenium.WebDriver
 import com.cyrusinnovation.selenium.{DefaultBaseURLProvider, WebDriverFactory}
+import cucumber.api.Scenario
 
 class HelloWorldWebSteps extends ScalaDsl with EN with WebBrowser with DefaultBaseURLProvider with ShouldMatchers with SpanSugar {
   private  val host = defaultBaseUrl
-  implicit val webDriver: WebDriver = new WebDriverFactory().driver()
+  implicit val webDriver: WebDriver = WebDriverFactory.driver()
   implicit val patienceConfig = PatienceConfig(2 seconds, 250 millis)      // Timeout and poll interval for "eventually" method
 
 
@@ -23,6 +22,11 @@ class HelloWorldWebSteps extends ScalaDsl with EN with WebBrowser with DefaultBa
   private val pagesByPath = Map(Homepage.path -> Homepage,
                                 StaticContentPage.path -> StaticContentPage)
 
+
+  Before((scenario: Scenario) => {
+    WebDriverFactory.deleteAllCookies()
+    WebDriverFactory.closeAllChildWindows()
+  })
 
   Given("^I have browsed to the (.*) page") {
     (pageIdentifier: String) => {
