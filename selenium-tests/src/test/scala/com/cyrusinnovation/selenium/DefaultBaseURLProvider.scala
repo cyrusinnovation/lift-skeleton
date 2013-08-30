@@ -9,5 +9,5 @@ package com.cyrusinnovation.selenium
   * defaults to "http://localhost:8080/"
   */
 trait DefaultBaseURLProvider {
-  protected val defaultBaseUrl = Option(System.getProperty("default.base.url")).getOrElse("http://localhost:8080/")
+  protected val defaultBaseUrl = Option(System.getProperty("default.base.url")).getOrElse("http://localhost:8080")
 }
